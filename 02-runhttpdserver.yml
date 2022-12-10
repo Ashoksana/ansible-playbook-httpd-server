@@ -1,0 +1,36 @@
+---
+- name: setup httpd
+  hosts: w1
+  become: yes    
+
+  tasks:
+  - name: install git
+    package:
+      name: git
+      state: present
+    
+  - name: clone the code from git repo
+    git:
+      dest: /var/www/html
+      repo: https://github.com/Ashoksana/ecomm.git     
+
+  - name: install httpd
+    package: 
+      name: httpd
+      state: present
+
+  - name: started httpd service
+    service:
+      name: httpd 
+      state: started
+
+  - name: enable httpd service
+    service:
+      name: httpd
+      enable: yes
+ 
+  - name: clone the code from git repo
+    git:
+      dest: /var/www/html
+      repo: https://github.com/Ashoksana/ecomm.git      
+             
